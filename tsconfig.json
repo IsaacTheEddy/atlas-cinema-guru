@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     "seed/users.ts",
     "scripts/seed.js"
-  ],
+, "app/ui/watchLater", "app/ui/favorites", "app/ui/home"  ],
   "exclude": ["node_modules"]
 }

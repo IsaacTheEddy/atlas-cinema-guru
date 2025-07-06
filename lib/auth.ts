@@ -1,4 +1,7 @@
 import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import { redirect } from "next/dist/server/api-utils";
+
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   theme: {
@@ -6,11 +9,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     logo: "/logo.png",
     buttonText: "#ffffff",
   },
-  providers: [],
-  callbacks: {
-    authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
-      return !!auth;
-    },
-  },
+  providers: [GitHub],
 });
