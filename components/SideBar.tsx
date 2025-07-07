@@ -54,27 +54,35 @@ export default function SideBar({
   activity?: string;
 }) {
   return (
-    <div className="flex flex-col  bg-sidebar-100 h-100% w-15 hover:w-50 p-5 group ">
-      <div className="flex flex-col space-y-5 flex-1 ">
-        <Link href={"/ui/home"}>
+    <div className="flex flex-row bg-sidebar-100 h-15 md:h-full md:flex-col md:w-20 md:items-start hover:w-50 p-5 group ">
+      <div className="flex flex-row md:flex-col md:space-y-5 md:flex-1 mb-5 justify-between space-x-6 md:space-x-0 items-center ">
+        <Link href={"/ui/home"} className="flex flex-row items-start w-full">
           {fileIcon}
-          <span className="invisible group-hover:visible">Home</span>
+          <span className="md:invisible md:group-hover:visible">Home</span>
         </Link>
-        <Link href={"/ui/favorites"}>
+        <Link
+          href={"/ui/favorites"}
+          className="flex flex-row items-start w-full"
+        >
           {favoritesIcon}
-          <span className="invisible group-hover:visible">Favorites</span>
+          <span className="md:invisible md:group-hover:visible">Favorites</span>
         </Link>
-        <Link href={"/ui/watchLater"}>
+        <Link
+          href={"/ui/watchLater"}
+          className="flex flex-row items-start w-full"
+        >
           {watchLaterIcon}
-          <span className="invisible group-hover:visible">Watch Later</span>
+          <span className="md:invisible md:group-hover:visible">
+            Watch Later
+          </span>
         </Link>
       </div>
 
-      <div className="flex flex-col space-y-5 flex-2 invisible group-hover:visible">
-        Latest Activites
-        <div>
-          <p>{date}</p>
-          <p>{activity}</p>
+      <div className="flex flex-col flex-3 invisible group-hover:visible text-center w-full bg-navbar-100 rounded-2xl">
+        <span className="font-bold text-atlas_blue-100">Latest Activites</span>
+        <div className="flex flex-col space-y-1 p-2 ">
+          <p>{date}Hekko</p>
+          <p>{activity}poo pee</p>
         </div>
       </div>
     </div>

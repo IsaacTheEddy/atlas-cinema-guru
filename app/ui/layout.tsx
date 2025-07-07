@@ -11,11 +11,11 @@ export default async function Layout({
   const session = await auth();
   if (!session) return redirect("/");
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex md:h-screen w-screen flex-col">
       <NavBar email={session?.user?.email} />
-      <div className="flex flex-row h-screen">
+      <div className="flex md:flex-row flex-col w-screen h-screen">
         <SideBar />
-        <div>{children}</div>
+        <div className="flex flex-col w-full">{children}</div>
       </div>
     </div>
   );
