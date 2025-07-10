@@ -8,7 +8,7 @@ export default async function Page() {
       <form
         action={async () => {
           "use server";
-          await signIn("default", { redirectTo: "/ui" });
+          await signIn("default", { redirectTo: "/ui/home" });
         }}
       >
         <button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">

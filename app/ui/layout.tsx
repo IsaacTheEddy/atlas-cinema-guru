@@ -11,9 +11,9 @@ export default async function Layout({
   const session = await auth();
   if (!session) return redirect("/");
   return (
-    <div className="flex md:h-screen w-screen flex-col">
+    <div className="flex md:h-screen w-full h-full flex-col ">
       <NavBar email={session?.user?.email} />
-      <div className="flex md:flex-row flex-col w-screen h-screen">
+      <div className="flex md:flex-row flex-col w-full h-full">
         <SideBar />
         <div className="flex flex-col w-full">{children}</div>
       </div>

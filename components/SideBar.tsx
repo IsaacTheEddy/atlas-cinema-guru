@@ -38,8 +38,8 @@ const watchLaterIcon = (
     fill="none"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M15 27C21.6274 27 27 21.6274 27 15C27 8.37258 21.6274 3 15 3C8.37258 3 3 8.37258 3 15C3 21.6274 8.37258 27 15 27ZM16 9C16 8.44772 15.5523 8 15 8C14.4477 8 14 8.44772 14 9V15C14 15.2652 14.1054 15.5196 14.2929 15.7071L18.5355 19.9497C18.9261 20.3403 19.5592 20.3403 19.9497 19.9497C20.3403 19.5592 20.3403 18.9261 19.9497 18.5355L16 14.5858V9Z"
       fill="white"
     />
@@ -54,8 +54,8 @@ export default function SideBar({
   activity?: string;
 }) {
   return (
-    <div className="flex flex-row bg-sidebar-100 h-15 md:h-full md:flex-col md:w-20 md:items-start hover:w-50 p-5 group ">
-      <div className="flex flex-row md:flex-col md:space-y-5 md:flex-1 mb-5 justify-between space-x-6 md:space-x-0 items-center ">
+    <div className=" flex flex-row bg-sidebar-100 h-15 md:h-auto md:flex-col md:w-20 md:items-start hover:w-50 md:p-5 group w-screen">
+      <div className=" flex flex-row md:flex-col md:space-y-5 md:flex-1 md:mb-5 md:justify-between items-center md:space-x-0 md:items-center  ">
         <Link href={"/ui/home"} className="flex flex-row items-start w-full">
           {fileIcon}
           <span className="md:invisible md:group-hover:visible">Home</span>
@@ -78,7 +78,7 @@ export default function SideBar({
         </Link>
       </div>
 
-      <div className="flex flex-col flex-3 invisible group-hover:visible text-center w-full bg-navbar-100 rounded-2xl">
+      <div className="hidden md:flex flex-col md:flex-3 invisible group-hover:visible text-center w-full bg-navbar-100 rounded-2xl">
         <span className="font-bold text-atlas_blue-100">Latest Activites</span>
         <div className="flex flex-col space-y-1 p-2 ">
           <p>{date}Hekko</p>

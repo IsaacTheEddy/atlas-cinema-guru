@@ -2,7 +2,7 @@ import GenreButton from "@/components/GenreButton";
 
 export default async function Filter() {
   return (
-    <div className="flex flex-row justify-between w-[500px] m-auto">
+    <div className="flex md:flex-row flex-col justify-between md:w-full w-full md:m-auto">
       <form className="flex flex-col space-y-2">
         <div className="flex flex-col space-y-2">
           <label htmlFor="Search" className="pl-2">
@@ -12,9 +12,9 @@ export default async function Filter() {
             type="text"
             placeholder="Search"
             id="Search"
-            className="border-2 border-navbar-100 rounded-4xl p-1 bg-atlas_blue-50"
+            className="border-2 border-navbar-100 rounded-4xl p-1 w-full bg-atlas_blue-50"
           />
-          <div className="flex flex-row space-y-2 space-x-5">
+          <div className="flex flex-row space-y-2 md:space-x-5">
             <div className="flex flex-col">
               <label htmlFor="minYear" className="pl-2">
                 min year
@@ -23,7 +23,7 @@ export default async function Filter() {
                 type="text"
                 placeholder="min year"
                 id="minYear"
-                className="border-2 border-navbar-100 rounded-4xl p-1 bg-atlas_blue-50"
+                className="border-2 border-navbar-100 rounded-4xl p-1 w-40 bg-atlas_blue-50"
               />
             </div>
             <div className="flex flex-col">
@@ -34,12 +34,31 @@ export default async function Filter() {
                 type="text"
                 placeholder="max year"
                 id="maxYear"
-                className="border-2 border-navbar-100 rounded-4xl p-1 bg-atlas_blue-50"
+                className="border-2 border-navbar-100 rounded-4xl p-1 w-40 bg-atlas_blue-50"
               />
             </div>
           </div>
         </div>
       </form>
+      <div className="flex flex-col space-y-2">
+        <h1>Genres</h1>
+        <div className="flex flex-col space-y-5 md:w-full">
+          <div className="flex flex-row md:space-x-5">
+            <GenreButton genre="Romance"></GenreButton>
+            <GenreButton genre="Horror"></GenreButton>
+            <GenreButton genre="Drama"></GenreButton>
+            <GenreButton genre="Action"></GenreButton>
+            <GenreButton genre="Mystery"></GenreButton>
+          </div>
+          <div className="flex flex-row md:space-x-5">
+            <GenreButton genre="Fantasy"></GenreButton>
+            <GenreButton genre="Thriller"></GenreButton>
+            <GenreButton genre="Western"></GenreButton>
+            <GenreButton genre="Sci-Fi"></GenreButton>
+            <GenreButton genre="Adventure"></GenreButton>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
