@@ -1,5 +1,7 @@
 "use server"
 import { insertFavorite, deleteFavorite } from "./data"
+import { signOut } from "@/lib/auth";
+import { auth } from "./auth"
 
 export async function insertFav(FormData: FormData){
     const title_id = FormData.get("title_id") as string
@@ -27,5 +29,10 @@ export async function nextPage(FormData: FormData){
     const page = FormData.get("next") as string
     console.log(page)
     return page
+
+}
+
+export async function signOutUser(email: string){
+    await signOut()
 
 }

@@ -1,8 +1,6 @@
-import { insertFavorite, favoriteExists, deleteFavorite } from "@/lib/data";
-import { auth } from "@/lib/auth";
 import { FaRegClock, FaClock } from "react-icons/fa";
 import { insertFav, deleteFav } from "@/lib/actions";
-export default async function TitleCard({
+export default function TitleCard({
   id,
   email,
   title,
@@ -29,7 +27,7 @@ export default async function TitleCard({
         alt={image}
       ></img>
       <div className="hidden group-hover:flex group-active:flex absolute flex-row space-x-5 top-0 right-0 overflow-hidden rounded-b-2xl p-2">
-        {(await isFavorite) ? (
+        {isFavorite ? (
           <form action={deleteFav}>
             <input type="hidden" name="title_id" value={id} />
             <input type="hidden" name="user_id" value={email} />

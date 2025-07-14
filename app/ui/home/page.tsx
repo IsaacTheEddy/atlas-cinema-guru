@@ -1,16 +1,24 @@
-import { favoriteExists, fetchTitles } from "@/lib/data";
-import TitleCard from "@/components/TitleCard";
+import { fetchTitles, favoriteExists } from "@/lib/data";
 import { auth } from "@/lib/auth";
-import Filter from "@/components/FIlter";
-import { useContext } from "react";
-import { MovieContext, useMovieContext } from "@/context";
+import ClientPage from "@/components/ClientPage"; // this will stay a Client Component
 
-export default async function ServerPage({}) {
+interface Title {
+  favorited: boolean;
+  watchLater: boolean;
+  image: string;
+  id: string;
+  title: string;
+  synposis: string;
+  released: number;
+  genre: string;
+  isFavorite?: boolean;
+}
+
+export default async function Page() {
   const session = await auth();
-  if (!session?.user?.email) return;
+  if (!session?.user?.email) return <div>Unauthorized</div>;
 
   const email = session.user.email;
-  const { searchFilter } = useMovieContext();
 
   const genres = [
     "Romance",
@@ -27,44 +35,12 @@ export default async function ServerPage({}) {
 
   const titleList = await fetchTitles(1, 1999, 2999, "", genres, email);
 
-  // const filtered = titleList.filter((title) =>
-  //   title.title.toLowerCase().includes(searchFilter.toLowerCase())
-  // );
-
-  const favorites = await Promise.all(
+  const enrichedTitles: Title[] = await Promise.all(
     titleList.map(async (title) => {
       const isFav = await favoriteExists(title.id, email);
-      return { ...title, isFavorite: isFav };
+      return { ...title };
     })
   );
 
-  return (
-    <div className="flex flex-col items-center justify-center ">
-      <div className="mt-5 flex-row ">
-        <h1 className="text-3xl ">{searchFilter}</h1>
-      </div>
-      {/* Filter Goes Here */}
-      <div className="flex flex-row w-[90%] mb-19">
-        <Filter searchFilter={searchFilter} />
-      </div>
-      <div className="flex flex-col w-full">
-        <div className="grid md:grid-cols-3 grid-cols-1 md:m-auto md:flex-wrap m-auto md:gap-x-40 gap-y-5 ">
-          {titleList.map((title) => {
-            return (
-              <TitleCard
-                key={title.id}
-                id={title.id}
-                title={title.title}
-                released={title.released}
-                genre={title.genre}
-                image={title.image}
-                synopsis={title.synopsis}
-                email={email}
-              />
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
+  return <ClientPage list={enrichedTitles} email={email} />;
 }

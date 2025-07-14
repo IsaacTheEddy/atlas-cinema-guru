@@ -10,9 +10,6 @@ export default function Filter({
   maxYear?: number | undefined;
 }) {
   const { setSearchFilter, setMinYear, setMaxYear } = useMovieContext();
-  if (!setSearchFilter) {
-    return;
-  }
   if (!setMinYear) {
     return;
   }
@@ -31,7 +28,7 @@ export default function Filter({
             placeholder="Search"
             id="Search"
             className="border-2 border-navbar-100 rounded-4xl p-1 w-full bg-atlas_blue-50"
-            onChange={(e) => setSearchFilter(e.target.value)}
+            onChange={(e) => setSearchFilter?.(e.target.value)}
           />
           <div className="flex flex-row space-y-2 md:space-x-5">
             <div className="flex flex-col">
