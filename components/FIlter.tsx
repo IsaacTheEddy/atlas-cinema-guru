@@ -1,6 +1,24 @@
+"use client";
 import GenreButton from "@/components/GenreButton";
-
-export default async function Filter() {
+import { useMovieContext } from "@/context";
+export default function Filter({
+  minYear,
+  maxYear,
+}: {
+  searchFilter?: string | undefined;
+  minYear?: number | undefined;
+  maxYear?: number | undefined;
+}) {
+  const { setSearchFilter, setMinYear, setMaxYear } = useMovieContext();
+  if (!setSearchFilter) {
+    return;
+  }
+  if (!setMinYear) {
+    return;
+  }
+  if (!setMaxYear) {
+    return;
+  }
   return (
     <div className="flex md:flex-row flex-col justify-between md:w-full w-full md:m-auto">
       <form className="flex flex-col space-y-2">
@@ -13,6 +31,7 @@ export default async function Filter() {
             placeholder="Search"
             id="Search"
             className="border-2 border-navbar-100 rounded-4xl p-1 w-full bg-atlas_blue-50"
+            onChange={(e) => setSearchFilter(e.target.value)}
           />
           <div className="flex flex-row space-y-2 md:space-x-5">
             <div className="flex flex-col">
@@ -24,6 +43,7 @@ export default async function Filter() {
                 placeholder="min year"
                 id="minYear"
                 className="border-2 border-navbar-100 rounded-4xl p-1 w-40 bg-atlas_blue-50"
+                value={minYear}
               />
             </div>
             <div className="flex flex-col">
@@ -35,6 +55,7 @@ export default async function Filter() {
                 placeholder="max year"
                 id="maxYear"
                 className="border-2 border-navbar-100 rounded-4xl p-1 w-40 bg-atlas_blue-50"
+                value={maxYear}
               />
             </div>
           </div>

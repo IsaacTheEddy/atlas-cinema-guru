@@ -14,10 +14,8 @@ export type Topic = {
 };
 
 export type Question = {
-  id: string;
-  title: string;
-  topic_id: string;
-  votes: number;
+  title_id: string;
+  user_id: string;
 };
 
 export type Title = {
