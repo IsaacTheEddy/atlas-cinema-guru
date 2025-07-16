@@ -97,8 +97,13 @@ export async function fetchFavorites(page: number, userEmail: string) {
  */
 export async function insertFavorite(title_id: string, userEmail: string) {
   try {
+    const check = await favoriteExists(title_id, userEmail);
+    if (check) {
+      await deleteFavorite(title_id, userEmail);
+      return;
+    }
     const data =
-      await sql<Question>`INSERT INTO favorites (title_id, user_id) VALUES (${title_id}, ${userEmail})`;
+      await sql<Question>`INSERT INTO favorites (title_id, user_id) VALUES (${title_id}, ${userEmail}) ON CONFLICT DO NOTHING`;
     insertActivity(title_id, userEmail, "FAVORITED");
     return data.rows;
   } catch (error) {
@@ -175,6 +180,11 @@ export async function fetchWatchLaters(page: number, userEmail: string) {
  */
 export async function insertWatchLater(title_id: string, userEmail: string) {
   try {
+        const check = await watchLaterExists(title_id, userEmail);
+    if (check) {
+      await deleteWatchLater(title_id, userEmail);
+      return
+    }
     const data =
       await sql<Question>`INSERT INTO watchLater (title_id, user_id) VALUES (${title_id}, ${userEmail})`;
 
@@ -208,6 +218,7 @@ export async function watchLaterExists(
   userEmail: string
 ): Promise<boolean> {
   try {
+ 
     const data =
       await sql`SELECT * FROM watchLater WHERE title_id = ${title_id} AND user_id = ${userEmail}`;
     return data.rows.length > 0;
@@ -247,7 +258,7 @@ export async function fetchActivities(page: number, userEmail: string) {
       .limit(10)
       .offset((page - 1) * 10)
       .execute();
-
+      console.log(activities)
     return activities;
   } catch (error) {
     console.error("Database Error:", error);

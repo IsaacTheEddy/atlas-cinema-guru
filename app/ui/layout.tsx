@@ -8,9 +8,9 @@ import { MovieWrapper, useMovieContext } from "@/context";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <MovieWrapper>
-      <div className="flex md:h-screen w-full h-full flex-col ">
+      <div className="flex md:h-screen w-full h-screen flex-col ">
         <NavBar />
-        <div className="flex md:flex-row flex-col w-full h-full">
+        <div className="flex md:flex-row flex-col ">
           <SideBar />
           <div className="flex flex-col w-full">{children}</div>
         </div>

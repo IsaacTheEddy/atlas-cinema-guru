@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LatestActivities from "./LatestActivities";
 
 // Icon SVGs suggest you minimize in editor
 const fileIcon = (
@@ -56,19 +57,19 @@ export default function SideBar({
   return (
     <div className=" flex flex-row bg-sidebar-100 h-15 md:h-auto md:flex-col md:w-20 md:items-start hover:w-50 md:p-5 group w-screen">
       <div className=" flex flex-row md:flex-col md:space-y-5 md:flex-1 md:mb-5 md:justify-between items-center md:space-x-0 md:items-center  ">
-        <Link href={"/ui/home"} className="flex flex-row items-start w-full">
+        <Link href={"/ui/home/1"} className="flex flex-row items-start w-full">
           {fileIcon}
           <span className="md:invisible md:group-hover:visible">Home</span>
         </Link>
         <Link
-          href={"/ui/favorites"}
+          href={"/ui/favorites/1"}
           className="flex flex-row items-start w-full"
         >
           {favoritesIcon}
           <span className="md:invisible md:group-hover:visible">Favorites</span>
         </Link>
         <Link
-          href={"/ui/watchLater"}
+          href={"/ui/watchLater/1"}
           className="flex flex-row items-start w-full"
         >
           {watchLaterIcon}
@@ -79,11 +80,7 @@ export default function SideBar({
       </div>
 
       <div className="hidden md:flex flex-col md:flex-3 invisible group-hover:visible text-center w-full bg-navbar-100 rounded-2xl">
-        <span className="font-bold text-atlas_blue-100">Latest Activites</span>
-        <div className="flex flex-col space-y-1 p-2 ">
-          <p>{date}Hekko</p>
-          <p>{activity}poo pee</p>
-        </div>
+        <LatestActivities date={date} activity={activity} />
       </div>
     </div>
   );

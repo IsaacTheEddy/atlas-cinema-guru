@@ -1,5 +1,5 @@
 import { FaRegClock, FaClock } from "react-icons/fa";
-import { insertFav, deleteFav } from "@/lib/actions";
+import { insertFav, insertWL } from "@/lib/actions";
 export default function TitleCard({
   id,
   email,
@@ -27,23 +27,20 @@ export default function TitleCard({
         alt={image}
       ></img>
       <div className="hidden group-hover:flex group-active:flex absolute flex-row space-x-5 top-0 right-0 overflow-hidden rounded-b-2xl p-2">
-        {isFavorite ? (
-          <form action={deleteFav}>
-            <input type="hidden" name="title_id" value={id} />
-            <input type="hidden" name="user_id" value={email} />
-            <button type="submit">
-              <FaClock />
-            </button>
-          </form>
-        ) : (
-          <form action={insertFav}>
-            <input type="hidden" name="title_id" value={id} />
-            <input type="hidden" name="user_id" value={email} />
-            <button type="submit" disabled={false}>
-              <FaRegClock />
-            </button>
-          </form>
-        )}
+        <form action={insertFav}>
+          <input type="hidden" name="title_id" value={id} />
+          <input type="hidden" name="user_id" value={email} />
+          <button type="submit" disabled={false}>
+            <FaRegClock />
+          </button>
+        </form>
+        <form action={insertWL}>
+          <input type="hidden" name="title_id" value={id} />
+          <input type="hidden" name="user_id" value={email} />
+          <button type="submit" disabled={false}>
+            <FaClock />
+          </button>
+        </form>
 
         <button></button>
       </div>
