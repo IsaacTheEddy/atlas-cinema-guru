@@ -27,9 +27,8 @@ export async function insertWL(FormData: FormData){
 }
 
 
-export async function signOutUser(email: string){
+export async function signOutUser(){
     await signOut()
-
 }
 
 export async function getActivites(page: number, userEmail: string){

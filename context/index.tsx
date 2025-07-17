@@ -10,6 +10,10 @@ interface MovieContextType {
   setMaxYear?: React.Dispatch<SetStateAction<number | undefined>>;
   genre?: string | undefined;
   setGenere?: React.Dispatch<SetStateAction<string | undefined>>;
+  page?: number | undefined;
+  setPage?: React.Dispatch<SetStateAction<number>>;
+  email?: string | undefined;
+  setEmail?: React.Dispatch<SetStateAction<string>>;
 }
 
 export const MovieContext = createContext<MovieContextType>({});
@@ -18,6 +22,9 @@ export function MovieWrapper({ children }: { children: React.ReactNode }) {
   const [searchFilter, setSearchFilter] = useState<string>("");
   const [minYear, setMinYear] = useState<number>();
   const [maxYear, setMaxYear] = useState<number>();
+  const [genre, setGenere] = useState<string>();
+  const [page, setPage] = useState<number>(1);
+  const [email, setEmail] = useState<string>("");
   return (
     <MovieContext.Provider
       value={{
@@ -27,6 +34,12 @@ export function MovieWrapper({ children }: { children: React.ReactNode }) {
         setMinYear,
         maxYear,
         setMaxYear,
+        page,
+        setPage,
+        genre,
+        setGenere,
+        email,
+        setEmail,
       }}
     >
       {children}

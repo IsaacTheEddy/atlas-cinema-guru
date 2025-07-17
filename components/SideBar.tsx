@@ -57,19 +57,22 @@ export default function SideBar({
   return (
     <div className=" flex flex-row bg-sidebar-100 h-15 md:h-auto md:flex-col md:w-20 md:items-start hover:w-50 md:p-5 group w-screen">
       <div className=" flex flex-row md:flex-col md:space-y-5 md:flex-1 md:mb-5 md:justify-between items-center md:space-x-0 md:items-center  ">
-        <Link href={"/ui/home/1"} className="flex flex-row items-start w-full">
+        <Link
+          href={"/?page=1&genre="}
+          className="flex flex-row items-start w-full"
+        >
           {fileIcon}
           <span className="md:invisible md:group-hover:visible">Home</span>
         </Link>
         <Link
-          href={"/ui/favorites/1"}
+          href={"/favorites?page=1&genre="}
           className="flex flex-row items-start w-full"
         >
           {favoritesIcon}
           <span className="md:invisible md:group-hover:visible">Favorites</span>
         </Link>
         <Link
-          href={"/ui/watchLater/1"}
+          href={"/watchLater?page=1&genre="}
           className="flex flex-row items-start w-full"
         >
           {watchLaterIcon}

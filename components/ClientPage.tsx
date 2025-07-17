@@ -14,21 +14,29 @@ interface Title {
   image: string;
   synopsis: string; // fixed spelling
   isFavorite?: boolean;
+  email: string;
 }
 
 export default function ClientPage({
   list,
   email,
-  page,
+  currentPage,
   hasNextPage,
 }: {
   list: Title[];
   email: string;
-  page: number;
+  currentPage: number;
   hasNextPage: boolean;
 }) {
-  const { searchFilter } = useMovieContext();
+  const { searchFilter, maxYear, minYear, setPage, page, genre, setEmail } =
+    useMovieContext();
+  if (!page) return;
 
+  useEffect(() => {
+    setPage?.(currentPage);
+    setEmail?.(email);
+  });
+  console.log(page);
   const filteredTitles = searchFilter
     ? list.filter((title) =>
         title.title.toLowerCase().includes(searchFilter.toLowerCase())
@@ -45,7 +53,11 @@ export default function ClientPage({
       <Filter />
       <div className="flex flex-row justify-evenly w-full">
         {page > 1 ? (
-          <Link href={`${page - 1 > 0 ? page - 1 : 1}`}>
+          <Link
+            href={`/?page=${page - 1 > 0 ? page - 1 : 1}&genre=${
+              genre ? genre : ""
+            }`}
+          >
             <button className="flex bg-atlas_blue-50 w-20 h-10 border-navbar-100 border-2 text-navbar-100 text-center justify-center items-center hover:bg-sidebar-100 hover:text-white rounded-2xl">
               Previous
             </button>
@@ -54,7 +66,11 @@ export default function ClientPage({
           <div></div>
         )}
         {hasNextPage ? (
-          <Link href={`${page + 1 > 0 && hasNextPage ? page + 1 : 1}`}>
+          <Link
+            href={`/?page=${page + 1 > 0 && hasNextPage ? page + 1 : 1}&genre=${
+              genre ? genre : ""
+            }`}
+          >
             <button className="flex bg-atlas_blue-50 w-20 h-10 border-navbar-100 border-2 text-navbar-100 text-center justify-center items-center hover:bg-sidebar-100 hover:text-white rounded-2xl">
               Next
             </button>

@@ -1,4 +1,4 @@
-import { fetchTitles, favoriteExists } from "@/lib/data";
+import { fetchTitles, favoriteExists, fetchWatchLaters } from "@/lib/data";
 import ClientPage from "@/components/ClientPage";
 import SideBar from "@/components/SideBar";
 import { auth } from "@/lib/auth";
@@ -57,29 +57,12 @@ export default async function Page({
   // Debug log to check parsed values
   console.log({
     page,
-    minYear,
-    maxYear,
-    genres,
     email,
   });
 
-  const titleList = await fetchTitles(
-    page,
-    minYear,
-    maxYear,
-    "",
-    genres,
-    email
-  );
+  const titleList = await fetchWatchLaters(page, email);
 
-  const nextPageTitles = await fetchTitles(
-    page + 1,
-    minYear,
-    maxYear,
-    "",
-    genres,
-    email
-  );
+  const nextPageTitles = await fetchWatchLaters(page + 1, email);
 
   const hasNextPage = nextPageTitles.length > 0;
 
@@ -100,7 +83,6 @@ export default async function Page({
       email={email}
       currentPage={page}
       hasNextPage={hasNextPage}
-      email={email}
     />
   );
 }

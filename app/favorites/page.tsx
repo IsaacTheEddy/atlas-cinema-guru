@@ -1,4 +1,4 @@
-import { fetchTitles, favoriteExists } from "@/lib/data";
+import { fetchTitles, favoriteExists, fetchFavorites } from "@/lib/data";
 import ClientPage from "@/components/ClientPage";
 import SideBar from "@/components/SideBar";
 import { auth } from "@/lib/auth";
@@ -28,8 +28,6 @@ export default async function Page({
   const email = session.user.email;
 
   const page = parseInt(searchParams.page as string) || 1;
-  const minYear = parseInt(searchParams.minYear as string) || 1999;
-  const maxYear = parseInt(searchParams.maxYear as string) || 2999;
 
   // ✅ Fix genre parsing
   let genres: string[] = [""];
@@ -57,29 +55,13 @@ export default async function Page({
   // Debug log to check parsed values
   console.log({
     page,
-    minYear,
-    maxYear,
-    genres,
+
     email,
   });
 
-  const titleList = await fetchTitles(
-    page,
-    minYear,
-    maxYear,
-    "",
-    genres,
-    email
-  );
+  const titleList = await fetchFavorites(page, email);
 
-  const nextPageTitles = await fetchTitles(
-    page + 1,
-    minYear,
-    maxYear,
-    "",
-    genres,
-    email
-  );
+  const nextPageTitles = await fetchFavorites(page + 1, email);
 
   const hasNextPage = nextPageTitles.length > 0;
 
@@ -100,7 +82,6 @@ export default async function Page({
       email={email}
       currentPage={page}
       hasNextPage={hasNextPage}
-      email={email}
     />
   );
 }
