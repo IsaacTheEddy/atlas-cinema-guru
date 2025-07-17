@@ -1,9 +1,19 @@
 import { fetchTitles, favoriteExists } from "@/lib/data";
 import ClientPage from "@/components/ClientPage";
-import SideBar from "@/components/SideBar";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
+interface Title {
+  favorited: boolean;
+  watchLater: boolean;
+  image: string;
+  id: string;
+  title: string;
+  synposis: string;
+  released: number;
+  genre: string;
+  isFavorite?: boolean;
+}
 interface Title {
   favorited: boolean;
   watchLater: boolean;
@@ -21,13 +31,19 @@ export default async function Page({
 }: {
   searchParams: Record<string, string | string[]>;
 }) {
+  const hasParams = Object.keys(searchParams).length > 0;
+
+  if (!hasParams) {
+    return redirect("/?page=1&genre=");
+  }
+
   const session = await auth();
   if (!session) return redirect("/SignIn");
   if (!session?.user?.email) return <div>Unauthorized</div>;
 
   const email = session.user.email;
 
-  const page = parseInt(searchParams.page as string) || 1;
+  const page = parseInt(searchParams.page as string) | 1;
   const minYear = parseInt(searchParams.minYear as string) || 1999;
   const maxYear = parseInt(searchParams.maxYear as string) || 2999;
 
